@@ -35,6 +35,9 @@ You can use this repository as a template to create a new project.
 
 2. By clicking use this template
 
+   ![image](https://github.com/user-attachments/assets/40a5bbd6-6be1-4059-b003-c1cc6bfce56a)
+
+
    
 
 ### 2\. Install dependencies
