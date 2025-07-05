@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js 15 + Tailwind CSS v4 + TypeScript Starter
+
+This is a starter template for building modern web applications with Next.js 15, Tailwind CSS v4, and TypeScript. It's packed with features to streamline your development process and build high-quality, scalable applications.
+
+-----
+
+## 🚀 Features
+
+This starter template is packed with the following features:
+
+  * **⚡️ Next.js 15:** The latest version of the popular React framework, with support for the App Router.
+  * **⚛️ React 19:** The newest version of the React library for building user interfaces.
+  * **✨ TypeScript:** A typed superset of JavaScript that compiles to plain JavaScript.
+  * **💨 Tailwind CSS v4:** A utility-first CSS framework for rapid UI development.
+  * **💎 Pre-built Components:** A collection of ready-to-use components that automatically adapt to your brand colors.
+  * **📈 Absolute Import and Path Alias:** Import components using the `@/` prefix.
+  * **📏 ESLint:** Find and fix problems in your code, and automatically sort your imports.
+  * **🐶 Husky & Lint Staged:** Run scripts on your staged files before they are committed to ensure code quality.
+  * **🤖 Conventional Commit Lint:** Enforce a consistent commit message format.
+  * **🗺 Site Map:** Automatically generate a `sitemap.xml` for your site.
+
+-----
 
 ## Getting Started
 
-First, run the development server:
+### 1\. Clone the template
+
+You can use this repository as a template to create a new project.
+
+1. Using bash or other terminal
+
+   ```
+   git clone https://github.com/chowjustin/next-template-v2
+   ```
+
+2. By clicking use this template
+
+   
+
+### 2\. Install dependencies
+
+It is recommended to use `pnpm` to install the dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3\. Run the development server
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Start the development server with the following command:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm dev
+```
 
-## Learn More
+Open [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000) in your browser to see the result. You can start editing the page by modifying `src/app/page.tsx`.
 
-To learn more about Next.js, take a look at the following resources:
+### 4\. Customize the template
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+There are a few things you need to change to customize the template:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  * **`!CHANGETHIS` comments:** Find all comments with `!CHANGETHIS` in the code and follow the instructions.
+  * **`package.json`:** Change the package name to your project's name.
+  * **Favicons and other assets:** Replace the default favicons and other assets with your own.
 
-## Deploy on Vercel
+-----
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Commit Message Convention
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This starter template uses the [Conventional Commits](https://www.conventionalcommits.org/) specification. This ensures a consistent and readable commit history.
+
