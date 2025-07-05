@@ -1,0 +1,14 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /sandbox
+
+# Host
+Host: https://example.com
+
+# Sitemaps
+Sitemap: https://example.com/sitemap.xml
+Sitemap: undefined/sitemap.xml
