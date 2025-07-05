@@ -5,10 +5,10 @@ import clsxm from "@/lib/clsxm";
 
 export default function HelperText({
 	children,
-	helperTextClassName,
+	className,
 }: {
 	children: ReactNode;
-	helperTextClassName?: string;
+	className?: string;
 }) {
 	return (
 		<div className="flex space-x-1">
@@ -16,10 +16,7 @@ export default function HelperText({
 				as="p"
 				font="Inter"
 				weight="regular"
-				className={clsxm(
-					"text-xs !leading-tight text-gray-900",
-					helperTextClassName,
-				)}
+				className={clsxm("text-xs !leading-tight text-gray-900", className)}
 			>
 				{children}
 			</Typography>

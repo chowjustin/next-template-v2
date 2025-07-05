@@ -11,6 +11,54 @@ type Ttable = {
 	href: string;
 };
 
+export default function TableTest() {
+	return (
+		<div className="flex h-full min-h-screen w-full flex-col items-center bg-white justify-center overflow-hidden">
+			<Table
+				className="text-black w-3/4"
+				data={data}
+				columns={columns}
+				withFilter
+				withEntries
+				withPaginationControl
+				withLink
+			/>
+		</div>
+	);
+}
+
+const columns: ColumnDef<Ttable>[] = [
+	{
+		accessorKey: "id",
+		header: "No",
+		cell: (props) => <span>{`${props.getValue()}`}</span>,
+	},
+	{
+		accessorKey: "nama_supplier",
+		header: "Nama Supplier",
+		cell: (props) => <span>{`${props.getValue()}`}</span>,
+		filterFn: (row, id, value) => {
+			return value.includes(row.getValue(id));
+		},
+	},
+	{
+		accessorKey: "merk",
+		header: "Merk",
+		cell: (props) => <span>{`${props.getValue()}`}</span>,
+		filterFn: (row, id, value) => {
+			return value.includes(row.getValue(id));
+		},
+	},
+	{
+		accessorKey: "discount",
+		header: "Diskon",
+		cell: (props) => <span>{`${props.getValue()}`}</span>,
+		filterFn: (row, id, value) => {
+			return value.includes(row.getValue(id));
+		},
+	},
+];
+
 const data: Ttable[] = [
 	{
 		id: "1",
@@ -118,53 +166,3 @@ const data: Ttable[] = [
 		href: "https://www.youtube.com/watch?v=QH2-TGUlwu4",
 	},
 ];
-
-export default function TableTest() {
-	const columns: ColumnDef<Ttable>[] = [
-		{
-			accessorKey: "id",
-			header: "No",
-			cell: (props) => <span>{`${props.getValue()}`}</span>,
-		},
-		{
-			accessorKey: "nama_supplier",
-			header: "Nama Supplier",
-			cell: (props) => <span>{`${props.getValue()}`}</span>,
-			filterFn: (row, id, value) => {
-				return value.includes(row.getValue(id));
-			},
-		},
-		{
-			accessorKey: "merk",
-			header: "Merk",
-			cell: (props) => <span>{`${props.getValue()}`}</span>,
-			filterFn: (row, id, value) => {
-				return value.includes(row.getValue(id));
-			},
-		},
-		{
-			accessorKey: "discount",
-			header: "Diskon",
-			cell: (props) => <span>{`${props.getValue()}`}</span>,
-			filterFn: (row, id, value) => {
-				return value.includes(row.getValue(id));
-			},
-		},
-	];
-
-	return (
-		<div className="flex h-full min-h-screen w-full flex-col items-center justify-center overflow-hidden">
-			<div className=" w-3/4 bg-white">
-				<Table
-					className="text-black"
-					data={data}
-					columns={columns}
-					withFilter
-					withEntries
-					withPaginationControl
-					withLink
-				/>
-			</div>
-		</div>
-	);
-}

@@ -2,6 +2,7 @@ import * as React from "react";
 import { get, type RegisterOptions, useFormContext } from "react-hook-form";
 import clsxm from "@/lib/clsxm";
 import ErrorMessage from "./ErrorMessage";
+import HelperText from "./HelperText";
 import LabelText from "./LabelText";
 
 export type TextAreaProps = {
@@ -75,7 +76,7 @@ export default function TextArea({
 					{value.length}/{maxLength}
 				</p>
 			</div>
-			{helperText && <h5 className="mt-1 text-base-secondary">{helperText}</h5>}
+			{helperText && <HelperText>{helperText}</HelperText>}
 			{!hideError && error && (
 				<ErrorMessage>{error.message?.toString()}</ErrorMessage>
 			)}

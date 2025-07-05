@@ -67,19 +67,17 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
 					//#region  //*=========== Variants ===========
 					[
 						variant === "primary" && [
-							"bg-primary-base text-white",
-							"border border-primary-hover",
-							"hover:bg-primary-hover hover:text-white",
-							"active:bg-primary-active",
-							"disabled:bg-disabled",
-							"focus-visible:ring-primary-base",
+							"bg-primary-500 text-white",
+							"border border-primary-600",
+							"hover:bg-primary-600 hover:text-white",
+							"active:bg-primary-700",
+							"focus-visible:ring-primary-400",
 						],
 						variant === "blue" && [
 							"bg-blue-500 text-white",
 							"border border-blue-600",
 							"hover:bg-blue-600 hover:text-white",
 							"active:bg-blue-700",
-							"disabled:bg-blue-700",
 							"focus-visible:ring-blue-400",
 						],
 						variant === "green" && [
@@ -87,7 +85,6 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
 							"border border-green-600",
 							"hover:bg-green-600 hover:text-white",
 							"active:bg-green-700",
-							"disabled:bg-green-700",
 							"focus-visible:ring-green-400",
 						],
 						variant === "red" && [
@@ -95,7 +92,6 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
 							"border border-red-600",
 							"hover:bg-red-600 hover:text-white",
 							"active:bg-red-700",
-							"disabled:bg-red-700",
 							"focus-visible:ring-red-400",
 						],
 						variant === "yellow" && [
@@ -103,7 +99,6 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
 							"border border-yellow-500",
 							"hover:bg-yellow-600 hover:text-white",
 							"active:bg-yellow-700",
-							"disabled:bg-yellow-700",
 							"focus-visible:ring-yellow-400",
 						],
 						variant === "outline" && [
@@ -118,7 +113,7 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
 						],
 					],
 					//#endregion  //*======== Variants ===========
-					"disabled:cursor-not-allowed",
+					"disabled:cursor-not-allowed disabled:opacity-60",
 					isLoading &&
 						"relative text-transparent transition-none hover:text-transparent disabled:cursor-wait",
 					className,

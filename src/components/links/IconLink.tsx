@@ -6,6 +6,7 @@ import UnstyledLink, {
 import clsxm from "@/lib/clsxm";
 
 const IconLinkVariant = [
+	"primary",
 	"blue",
 	"green",
 	"yellow",
@@ -62,12 +63,18 @@ const IconLink = React.forwardRef<HTMLAnchorElement, IconLinkProps>(
 					//#region  //*=========== Variants ===========
 					//#region  //*=========== Variants ===========
 					[
+						variant === "primary" && [
+							"bg-primary-500 text-white",
+							"border border-primary-600",
+							"hover:bg-primary-600 hover:text-white",
+							"active:bg-primary-700",
+							"focus-visible:ring-primary-400",
+						],
 						variant === "blue" && [
 							"bg-blue-500 text-white",
 							"border border-blue-600",
 							"hover:bg-blue-600 hover:text-white",
 							"active:bg-blue-700",
-							"disabled:bg-blue-700",
 							"focus-visible:ring-blue-400",
 						],
 						variant === "green" && [
@@ -75,7 +82,6 @@ const IconLink = React.forwardRef<HTMLAnchorElement, IconLinkProps>(
 							"border border-green-600",
 							"hover:bg-green-600 hover:text-white",
 							"active:bg-green-700",
-							"disabled:bg-green-700",
 							"focus-visible:ring-green-400",
 						],
 						variant === "red" && [
@@ -83,7 +89,6 @@ const IconLink = React.forwardRef<HTMLAnchorElement, IconLinkProps>(
 							"border border-red-600",
 							"hover:bg-red-600 hover:text-white",
 							"active:bg-red-700",
-							"disabled:bg-red-700",
 							"focus-visible:ring-red-400",
 						],
 						variant === "yellow" && [
@@ -91,7 +96,6 @@ const IconLink = React.forwardRef<HTMLAnchorElement, IconLinkProps>(
 							"border border-yellow-500",
 							"hover:bg-yellow-600 hover:text-white",
 							"active:bg-yellow-700",
-							"disabled:bg-yellow-700",
 							"focus-visible:ring-yellow-400",
 						],
 						variant === "outline" && [
@@ -106,7 +110,7 @@ const IconLink = React.forwardRef<HTMLAnchorElement, IconLinkProps>(
 						],
 					],
 					//#endregion  //*======== Variants ===========
-					"disabled:cursor-not-allowed",
+					"disabled:cursor-not-allowed disabled:opacity-60",
 					className,
 				)}
 				{...rest}

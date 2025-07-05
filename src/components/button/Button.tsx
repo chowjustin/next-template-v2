@@ -72,19 +72,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 					//#region  //*=========== Variants ===========
 					[
 						variant === "primary" && [
-							"bg-blue-500 text-white",
-							"border border-blue-600",
-							"hover:bg-blue-600 hover:text-white",
-							"active:bg-blue-700",
-							"disabled:bg-blue-700",
-							"focus-visible:ring-blue-400",
+							"bg-primary-500 text-white",
+							"border border-primary-600",
+							"hover:bg-primary-600 hover:text-white",
+							"active:bg-primary-700",
+							"focus-visible:ring-primary-400",
 						],
 						variant === "blue" && [
 							"bg-blue-500 text-white",
 							"border border-blue-600",
 							"hover:bg-blue-600 hover:text-white",
 							"active:bg-blue-700",
-							"disabled:bg-blue-700",
 							"focus-visible:ring-blue-400",
 						],
 						variant === "green" && [
@@ -92,7 +90,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 							"border border-green-600",
 							"hover:bg-green-600 hover:text-white",
 							"active:bg-green-700",
-							"disabled:bg-green-700",
 							"focus-visible:ring-green-400",
 						],
 						variant === "red" && [
@@ -100,7 +97,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 							"border border-red-600",
 							"hover:bg-red-600 hover:text-white",
 							"active:bg-red-700",
-							"disabled:bg-red-700",
 							"focus-visible:ring-red-400",
 						],
 						variant === "yellow" && [
@@ -108,7 +104,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 							"border border-yellow-500",
 							"hover:bg-yellow-600 hover:text-white",
 							"active:bg-yellow-700",
-							"disabled:bg-yellow-700",
 							"focus-visible:ring-yellow-400",
 						],
 						variant === "outline" && [
@@ -123,7 +118,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 						],
 					],
 					//#endregion  //*======== Variants ===========
-					"disabled:cursor-not-allowed",
+					"disabled:cursor-not-allowed disabled:opacity-60",
 					isLoading &&
 						"relative text-transparent transition-none hover:text-transparent disabled:cursor-wait",
 					className,
@@ -142,7 +137,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 									"red",
 									"yellow",
 								].includes(variant),
-								"text-blue-500": ["outline", "ghost"].includes(variant),
+								"text-gray-900": ["outline", "ghost"].includes(variant),
 							},
 						)}
 					>
