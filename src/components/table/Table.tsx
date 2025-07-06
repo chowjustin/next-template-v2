@@ -7,6 +7,7 @@ import {
 	getFilteredRowModel,
 	getPaginationRowModel,
 	getSortedRowModel,
+	type RowData,
 	type SortingState,
 	useReactTable,
 	type VisibilityState,
@@ -24,6 +25,12 @@ import clsxm from "@/lib/clsxm";
 export type ColumnMetaType = {
 	apiField?: string;
 };
+
+// Extend the ColumnMeta interface from @tanstack/react-table
+declare module "@tanstack/react-table" {
+	// biome-ignore lint/correctness/noUnusedVariables: All declarations of 'ColumnMeta' must have identical type parameters.
+	interface ColumnMeta<TData extends RowData, TValue> extends ColumnMetaType {}
+}
 
 type ApiIntegrationProps = {
 	enabled: boolean;
@@ -109,8 +116,7 @@ export default function Table<T extends object>({
 	React.useEffect(() => {
 		if (apiIntegration.enabled && apiIntegration.orderBy) {
 			const columnId = columns.findIndex(
-				(col) =>
-					(col.meta as ColumnMetaType)?.apiField === apiIntegration.orderBy,
+				(col) => col.meta?.apiField === apiIntegration.orderBy,
 			);
 
 			if (columnId !== -1) {
@@ -160,8 +166,7 @@ export default function Table<T extends object>({
 				if (sortedColumn) {
 					// Find the column definition to get the apiField
 					const columnDef = columns.find((col) => col.id === sortedColumn.id);
-					const apiField =
-						(columnDef?.meta as ColumnMetaType)?.apiField || sortedColumn.id;
+					const apiField = columnDef?.meta?.apiField || sortedColumn.id;
 
 					// If clicking the same column that was already sorted
 					if (apiSortState.column === apiField) {
@@ -195,8 +200,7 @@ export default function Table<T extends object>({
 					const sortedColumn = sorting[0];
 					if (sortedColumn) {
 						const columnDef = columns.find((col) => col.id === sortedColumn.id);
-						const apiField =
-							(columnDef?.meta as any)?.apiField || sortedColumn.id;
+						const apiField = columnDef?.meta?.apiField || sortedColumn.id;
 						onTableParamsChange(
 							newPagination.pageIndex + 1,
 							newPagination.pageSize,
@@ -249,7 +253,7 @@ export default function Table<T extends object>({
 							value={table.getState().pagination.pageSize}
 							onChange={(e) => {
 								const newSize = Number(e);
-								setPage((prev) => ({ ...prev, size: newSize }));
+								setPage({ page: 1, size: newSize });
 
 								if (apiIntegration.enabled && onTableParamsChange) {
 									const sortedColumn = sorting[0];
@@ -258,9 +262,9 @@ export default function Table<T extends object>({
 											(col) => col.id === sortedColumn.id,
 										);
 										const apiField =
-											(columnDef?.meta as any)?.apiField || sortedColumn.id;
+											columnDef?.meta?.apiField || sortedColumn.id;
 										onTableParamsChange(
-											pages.page,
+											1,
 											newSize,
 											apiField,
 											!sortedColumn.desc,
@@ -334,8 +338,7 @@ export default function Table<T extends object>({
 								const columnDef = columns.find(
 									(col) => col.id === sortedColumn.id,
 								);
-								const apiField =
-									(columnDef?.meta as any)?.apiField || sortedColumn.id;
+								const apiField = columnDef?.meta?.apiField || sortedColumn.id;
 								onTableParamsChange(
 									newPage,
 									pages.size,

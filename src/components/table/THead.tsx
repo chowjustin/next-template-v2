@@ -8,7 +8,19 @@ import clsxm from "@/lib/clsxm";
 type THeadProps<T extends RowData> = {
 	omitSort: boolean;
 	table: Table<T>;
-} & React.ComponentPropsWithoutRef<"div">;
+} & React.ComponentPropsWithoutRef<"thead">;
+
+// Extend the TableMeta interface from @tanstack/react-table
+declare module "@tanstack/react-table" {
+	// biome-ignore lint/correctness/noUnusedVariables: All declarations of 'TableMeta' must have identical type parameters.
+	interface TableMeta<TData extends RowData> {
+		isApiSorting?: boolean;
+		apiSortState?: {
+			column: string;
+			isAsc: boolean;
+		};
+	}
+}
 
 export default function THead<T extends RowData>({
 	className,
@@ -16,8 +28,8 @@ export default function THead<T extends RowData>({
 	table,
 	...rest
 }: THeadProps<T>) {
-	const isApiIntegrated = (table.options.meta as any)?.isApiSorting === true;
-	const apiSortState = (table.options.meta as any)?.apiSortState;
+	const isApiIntegrated = table.options.meta?.isApiSorting === true;
+	const apiSortState = table.options.meta?.apiSortState;
 
 	return (
 		<thead

@@ -5,35 +5,46 @@ import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Button from "@/components/button/Button";
 import Input from "@/components/form/Input";
+import SelectInput from "@/components/form/SelectInput";
 import UploadFile from "@/components/form/UploadFile";
 import api from "@/lib/api";
-import type { ApiError } from "@/types/api";
+import type { ApiError, ApiResponse } from "@/types/api";
+
+type SandboxForm = {
+	Test: string;
+	image: File[];
+};
+
+type FileUploadResponse = {
+	url: string;
+	fileName: string;
+};
 
 export default function FormSandbox() {
-	const methods = useForm();
+	const methods = useForm<SandboxForm>();
 
 	const { handleSubmit } = methods;
 
-	const { mutate: handleImageUpload } = useMutation<any, ApiError, FormData>({
+	const { mutate: handleImageUpload } = useMutation<
+		ApiResponse<FileUploadResponse>,
+		ApiError,
+		globalThis.FormData
+	>({
 		mutationFn: async (data) => {
-			await api
-				.post("/users/file", data, {
-					headers: {
-						"Content-Type": "multipart/form-data",
-					},
-				})
-				.then((res) => {
-					// const data = res.data.data;
-					toast.success("File uploaded!");
-					return res;
-				});
+			const res = await api.post("/users/file", data, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			});
+			toast.success("File uploaded!");
+			return res.data;
 		},
 		onError: (error) => {
 			toast.error(error.message);
 		},
 	});
 
-	const onSubmit: SubmitHandler<any> = (data) => {
+	const onSubmit: SubmitHandler<SandboxForm> = (data) => {
 		const formData = new FormData();
 
 		if (data.image?.[0]) {
@@ -58,6 +69,20 @@ export default function FormSandbox() {
 							placeholder="Username"
 							readOnly
 						/>
+						<SelectInput
+							id="sandbox1"
+							label="Required SelectInput"
+							options={options}
+							placeholder="Pilih opsi"
+							isSearchable={false}
+							validation={{ required: "SelectInput wajib diisi!" }}
+						/>
+						<SelectInput
+							id="sandbox2"
+							label="Searchable SelectInput"
+							options={options}
+							placeholder="Pilih opsi"
+						/>
 						<div>
 							<UploadFile
 								label="Upload File"
@@ -79,3 +104,11 @@ export default function FormSandbox() {
 		</main>
 	);
 }
+
+const options = [
+	{ value: "1", label: "Satu" },
+	{ value: "2", label: "Dua" },
+	{ value: "3", label: "Tiga" },
+	{ value: "4", label: "Empat" },
+	{ value: "5", label: "Lima" },
+];
