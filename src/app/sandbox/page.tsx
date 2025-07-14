@@ -1,4 +1,4 @@
-import ButtonLink from "@/components/links/ButtonLink";
+import PrimaryLink from "@/components/links/PrimaryLink";
 import Layout from "@/layouts/Layout";
 
 export default function SandboxPage() {
@@ -12,15 +12,15 @@ export default function SandboxPage() {
 					</p>
 				</div>
 				<div className="flex gap-4">
-					<ButtonLink variant="primary" href="/sandbox/button">
+					<PrimaryLink variant="red" href="/sandbox/button">
 						Button
-					</ButtonLink>
-					<ButtonLink variant="blue" href="/sandbox/form">
+					</PrimaryLink>
+					<PrimaryLink variant="blue" href="/sandbox/form">
 						Form
-					</ButtonLink>
-					<ButtonLink variant="green" href="/sandbox/table">
+					</PrimaryLink>
+					<PrimaryLink variant="green" href="/sandbox/table">
 						Table
-					</ButtonLink>
+					</PrimaryLink>
 				</div>
 			</div>
 		</Layout>
