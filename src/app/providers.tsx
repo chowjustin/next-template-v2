@@ -24,9 +24,12 @@ const queryClient = new QueryClient({
 
 export default function Providers({ children }: { children: React.ReactNode }) {
 	return (
-		<QueryClientProvider client={queryClient}>
-			<Toaster position="top-center" />
-			<NuqsAdapter>{children}</NuqsAdapter>
-		</QueryClientProvider>
+		// biome-ignore lint/complexity/noUselessFragments: Prevent unvalid react child if modules are removed
+		<>
+			<QueryClientProvider client={queryClient}>
+				<Toaster position="top-center" />
+				<NuqsAdapter>{children}</NuqsAdapter>
+			</QueryClientProvider>
+		</>
 	);
 }
