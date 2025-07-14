@@ -66,6 +66,30 @@ There are a few things you need to change to customize the template:
   * **`package.json`:** Change the package name to your project's name.
   * **Favicons and other assets:** Replace the default favicons and other assets with your own.
 
+### 5\. Cleanup Script
+
+This starter template includes several optional feature modules. If you don't need a specific feature, you can run the cleanup script to remove the associated files, dependencies, and provider configurations, keeping your project clean.
+
+### Usage
+
+To use the script, run the following command from the project root:
+
+```bash
+./cleanup.sh <component_name>
+```
+Available components:
+You can replace <component_name> with one of the following options:
+* `api`: Removes all files and dependencies related to API interaction and state management. This includes axios, @tanstack/react-query, zustand, react-hot-toast, and the authentication hooks/stores.
+* `table`: Removes the Table component, which is built on @tanstack/react-table, and its related files and dependencies like nuqs.
+* `form`: Removes the advanced form components and their dependencies, including react-hook-form, react-dropzone, react-select, and the lightbox modal.
+* `button`: Removes the custom Button, IconButton, and related link components (ButtonLink, IconLink).
+* `dialog`: Removes the custom ConfirmationDialog, and its dependencies.
+
+Note: if the script is not executeable yet, you can run the following command
+```bash
+chmod +x cleanup.sh
+```
+
 -----
 
 ## Commit Message Convention
