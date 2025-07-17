@@ -1,16 +1,11 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import UnstyledLink from "@/components/links/UnstyledLink";
 import NextImage from "@/components/NextImage";
 
-interface NavLink {
-	href: string;
-	label: string;
-}
-
-const navLinks: NavLink[] = [
+const navLinks = [
 	{ href: "/", label: "Beranda" },
 	{ href: "/about", label: "Tentang Kami" },
 	{ href: "/gallery", label: "Galeri" },
@@ -18,32 +13,59 @@ const navLinks: NavLink[] = [
 
 export default function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
+	const dropdownRef = useRef<HTMLDivElement>(null);
 	const pathname = usePathname();
 
-	const isActive = (href: string) => pathname === href;
+	const isActive = useMemo(
+		() => (href: string) => pathname === href,
+		[pathname],
+	);
+
+	useEffect(() => {
+		function handleClickOutside(event: MouseEvent) {
+			if (
+				dropdownRef.current &&
+				!dropdownRef.current.contains(event.target as Node)
+			) {
+				setIsOpen(false);
+			}
+		}
+
+		if (isOpen) {
+			document.addEventListener("mousedown", handleClickOutside);
+		}
+
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [isOpen]);
 
 	return (
 		<nav className="bg-white shadow-md w-full fixed z-50">
-			<div className="px-4 sm:px-6 md:px-8 lg:px-[10%] mx-auto">
+			<div className="px-4 sm:px-6 md:px-8 lg:px-[8%] mx-auto">
 				<div className="flex items-center justify-between h-20 max-md:h-16">
 					{/* Logo */}
-					<UnstyledLink href={`/`} className="flex items-center gap-2">
+					<UnstyledLink
+						href={`/`}
+						className="flex items-center gap-2 max-md:gap-1"
+					>
 						<NextImage
 							width={552}
 							height={388}
 							src={"/next.svg"}
-							serverStaticImg
 							alt="Logo"
-							className="flex max-w-[50px] items-center md:max-w-[75px]"
+							priority
+							serverStaticImg
+							className="flex max-w-[75px] items-center md:max-w-[100px]"
 						/>
-						<p className="text-xl max-md:text-base text-gray-900 font-semibold">
+						<p className="text-xl max-md:text-base max-lg:hidden max-md:block text-gray-900 font-semibold">
 							Next Template
 						</p>
 					</UnstyledLink>
 
 					{/* Desktop Menu */}
 					<div className="hidden md:flex items-center space-x-8">
-						<div className="flex items-baseline space-x-4">
+						<div className="flex items-baseline space-x-6">
 							{navLinks.map((link) => (
 								<UnstyledLink
 									href={link.href}
@@ -53,18 +75,14 @@ export default function Navbar() {
 									<p
 										className={`relative z-10 transition-all duration-300 ease-in-out ${
 											isActive(link.href)
-												? "text-gray-700 font-medium"
+												? "text-gray-700 font-bold"
 												: "hover:text-gray-700 text-gray-400"
 										}`}
 									>
 										{link.label}
 									</p>
 									<span
-										className={`absolute bottom-0 h-[1px] bg-gray-700 rounded-full transition-all duration-300 ease-in-out ${
-											isActive(link.href)
-												? "w-full left-0"
-												: "left-1/2 w-0 group-hover:w-full group-hover:left-0"
-										}`}
+										className={`absolute bottom-0 h-[1px] bg-gray-700 rounded-full transition-all duration-300 ease-in-out left-1/2 w-0 group-hover:w-full group-hover:left-0`}
 									></span>
 								</UnstyledLink>
 							))}
@@ -77,7 +95,7 @@ export default function Navbar() {
 						<button
 							type="button"
 							onClick={() => setIsOpen(!isOpen)}
-							className="inline-flex items-center cursor-pointer justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white transition-colors duration-200"
+							className="inline-flex items-center cursor-pointer justify-center rounded-md pt-1 text-primary-500 hover:text-primary-600 focus:outline-none focus:ring-inset focus:ring-white transition-colors duration-200"
 							aria-expanded={isOpen}
 							aria-label="Toggle navigation menu"
 						>
@@ -119,6 +137,7 @@ export default function Navbar() {
 
 						{/* Mobile Menu Dropdown */}
 						<div
+							ref={dropdownRef}
 							className={`absolute top-full left-0 right-0 md:hidden transition-all duration-500 ease-in-out ${
 								isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
 							} overflow-hidden bg-white border-t border-gray-200 shadow-lg z-50`}
@@ -128,10 +147,10 @@ export default function Navbar() {
 									<UnstyledLink
 										key={link.href}
 										href={link.href}
-										className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
+										className={`block px-3 py-2 rounded-md text-base transition-colors duration-300 ${
 											isActive(link.href)
-												? "bg-gray-700 text-white"
-												: "text-gray-600 hover:bg-gray-700 hover:text-white"
+												? "bg-primary-400 text-white font-semibold"
+												: "text-gray-400 hover:bg-primary-500 hover:text-white"
 										}`}
 										onClick={() => setIsOpen(false)}
 									>
